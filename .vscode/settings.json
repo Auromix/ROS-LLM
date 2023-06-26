@@ -1,0 +1,40 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/hermanye/rosllm_ws/build/llm_robot",
+        "/home/hermanye/rosllm_ws/install/llm_robot/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_output",
+        "/home/hermanye/rosllm_ws/install/llm_output/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_model",
+        "/home/hermanye/rosllm_ws/install/llm_model/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/install/llm_interfaces/local/lib/python3.10/dist-packages",
+        "/home/hermanye/rosllm_ws/build/llm_input",
+        "/home/hermanye/rosllm_ws/install/llm_input/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_config",
+        "/home/hermanye/rosllm_ws/install/llm_config/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_bringup",
+        "/home/hermanye/rosllm_ws/install/llm_bringup/lib/python3.10/site-packages",
+        "/home/hermanye/CODE/2023.5.18/gpt4_ros2/build/audio",
+        "/home/hermanye/CODE/2023.5.18/gpt4_ros2/install/audio/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/hermanye/rosllm_ws/build/llm_robot",
+        "/home/hermanye/rosllm_ws/install/llm_robot/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_output",
+        "/home/hermanye/rosllm_ws/install/llm_output/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_model",
+        "/home/hermanye/rosllm_ws/install/llm_model/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/install/llm_interfaces/local/lib/python3.10/dist-packages",
+        "/home/hermanye/rosllm_ws/build/llm_input",
+        "/home/hermanye/rosllm_ws/install/llm_input/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_config",
+        "/home/hermanye/rosllm_ws/install/llm_config/lib/python3.10/site-packages",
+        "/home/hermanye/rosllm_ws/build/llm_bringup",
+        "/home/hermanye/rosllm_ws/install/llm_bringup/lib/python3.10/site-packages",
+        "/home/hermanye/CODE/2023.5.18/gpt4_ros2/build/audio",
+        "/home/hermanye/CODE/2023.5.18/gpt4_ros2/install/audio/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
