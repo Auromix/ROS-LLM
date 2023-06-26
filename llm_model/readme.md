@@ -17,7 +17,7 @@ Overall, the `chatgpt.py` file provides a ROS-based conversational interface wit
 ## Usage
 To test the `turtle_robot.py` file with `robot node`, use the following ROS command-line to publish a speed command that **makes the turtlesim rotate**:
 ```bash
-ros2 service call /ChatGPT_service llm_interfaces/srv/ChatGPT '{request_text: "I want the turtlesim to move with a certain linear velocity and rotate counterclockwise"}'
+ros2 service call /ChatGPT_service llm_interfaces/srv/ChatGPT '{request_text: "Let the turtlesim rotate counterclockwise at a great angular velocity of 50 rad/s and move forward at a certain linear velocity"}'
 ```
 **Reset the turtlesim**
 ```bash

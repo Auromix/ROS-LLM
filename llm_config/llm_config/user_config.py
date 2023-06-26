@@ -93,21 +93,3 @@ class UserConfig:
         # [optional]: The robot functions list
         self.robot_functions_list = self.robot_behavior.robot_functions_list
 
-        # AWS IAM related
-        self.aws_access_key_id = "AKIAWCJXCMDK76RMJMVZ"  # From Amazon IAM
-        self.aws_secret_access_key = (
-            "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"  # From Amazon IAM
-        )
-        self.aws_region_name = "us-west-1"  # From Amazon S3
-        # AWS S3 related
-        self.bucket_name = "minipuppergpt"  # S3 Bucket name
-        # AWS transcribe related
-        self.aws_transcription_language = "en-US"  # Change this to 'zh-CN' for Chinese
-        # AWS Polly related
-        self.aws_voice_id = "Ivy"  # Choose a voice that supports your language
-        # Audio recording related
-        self.duration = 7  # Audio recording duration, in seconds
-        self.sample_rate = 16000  # Sample rate
-        self.volume_gain_multiplier = (
-            1  # Change this to increase or decrease the volume
-        )
