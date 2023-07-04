@@ -18,6 +18,11 @@
 #
 # Description:
 #
+# Node test Method:
+# ros2 run llm_input llm_audio_input
+# ros2 topic echo /llm_input_audio_to_text
+# ros2 topic pub /llm_state std_msgs/msg/String "data: 'listening'" -1
+#
 # Author: Herman Ye @Auromix
 
 # Other libraries
@@ -47,6 +52,7 @@ config = UserConfig()
 class AudioInput(Node):
     def __init__(self):
         super().__init__("llm_audio_input")
+
         # AWS service initialization
         self.aws_audio_file = "/tmp/user_audio_input.flac"
         self.aws_access_key_id = config.aws_access_key_id
@@ -60,26 +66,26 @@ class AudioInput(Node):
 
         # Initialization publisher
         self.initialization_publisher = self.create_publisher(
-            String, "/llm_initialization_state", 1
+            String, "/llm_initialization_state", 0
         )
 
         # LLM state publisher
-        self.llm_state_publisher = self.create_publisher(String, "/llm_state", 1)
+        self.llm_state_publisher = self.create_publisher(String, "/llm_state", 0)
 
         # LLM state listener
         self.llm_state_subscriber = self.create_subscription(
-            String, "/llm_state", self.state_listener_callback, 1
+            String, "/llm_state", self.state_listener_callback, 0
         )
 
         self.audio_to_text_publisher = self.create_publisher(
-            String, "/llm_input_audio_to_text", 1
+            String, "/llm_input_audio_to_text", 0
         )
         # Initialization ready
         self.publish_string("llm_audio_input", self.initialization_publisher)
 
     def state_listener_callback(self, msg):
         if msg.data == "listening":
-            self.get_logger().info(f"State: {msg.data}")
+            self.get_logger().info(f"STATE: {msg.data}")
             self.action_function_listening()
 
     def action_function_listening(self):
@@ -112,6 +118,7 @@ class AudioInput(Node):
         self.get_logger().info("Stop recording!")
 
         # action_function_input_processing
+        self.publish_string("input_processing", self.llm_state_publisher)
         # Step 4: Upload audio to AWS S3
         s3 = self.aws_session.client("s3")
         self.get_logger().info("Uploading audio to AWS S3...")
