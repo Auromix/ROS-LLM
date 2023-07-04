@@ -43,7 +43,7 @@ TEXT11="1. Go to the AWS Console IAM page."
 TEXT12="2. Click Users under the IAM resources section."
 TEXT13="3. Click Add user."
 TEXT14="4. Enter a User name."
-TEXT15="5. Under Set permissions, click Attach existing policies directly."
+TEXT15="5. Under Set permissions, click Attach policies directly."
 TEXT16="6. Add policies below:"
 TEXT17="AmazonPollyFullAccess, AmazonTranscribeFullAccess, AmazonS3FullAccess"
 TEXT18="7. Click Next, review the Permissions summary and any other information."
@@ -92,7 +92,7 @@ echo -e "${GREEN}$(printf '%*s' $TEXT20_PADDING)${TEXT20} ${NC}"
 read -p ""
 
 # Ask user for AWS access key id
-read -rp "Enter your AWS access key id: " AWS_ACCESS_KEY_ID
+read -rp "Enter your AWS access key id from user you created in IAM: " AWS_ACCESS_KEY_ID
 # Check if AWS_ACCESS_KEY_ID already exists in .bashrc file
 if grep -q "export AWS_ACCESS_KEY_ID" ~/.bashrc; then
   # Confirm with the user before removing the existing AWS_ACCESS_KEY_ID
@@ -153,7 +153,7 @@ cd llm_config/llm_config
 pwd
 
 # Ask user for aws_region_name
-read -p "Enter your aws region name in IAM: " aws_region_name
+read -p "Enter your aws region name in S3: " aws_region_name
 
 # Check if 'self.aws_region_name' exists in user_config.py and replace
 if grep -q "self.aws_region_name =" user_config.py; then

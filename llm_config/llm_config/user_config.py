@@ -102,9 +102,9 @@ class UserConfig:
         # [required]: AWS IAM secret access key
         self.aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
         # [required]: AWS IAM region name
-        self.aws_region_name = "<your_region_name>"
+        self.aws_region_name = 'us-west-1'
         # [required]: AWS S3 bucket name
-        self.bucket_name = "<your_bucket_name>"
+        self.bucket_name = 'auromixtestbucket'
         # [optional]: AWS transcription language, change this to 'zh-CN' for Chinese
         self.aws_transcription_language = "en-US"
         # [optional]: AWS polly voice id, change this to 'Zhiyu' for Chinese
