@@ -77,7 +77,7 @@ class AudioInput(Node):
         # Initialization ready
         self.publish_string("llm_audio_input", self.initialization_publisher)
 
-    def state_listener_callback(self,msg):
+    def state_listener_callback(self, msg):
         if msg.data == "listening":
             self.get_logger().info(f"State: {msg.data}")
             self.action_function_listening()
@@ -168,7 +168,7 @@ class AudioInput(Node):
     def publish_string(self, string_to_send, publisher_to_use):
         msg = String()
         msg.data = string_to_send
-        
+
         publisher_to_use.publish(msg)
         self.get_logger().info(
             f"Topic: {publisher_to_use.topic_name}\nMessage published: {msg.data}"
