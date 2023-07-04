@@ -41,9 +41,12 @@
 from .robot_behavior import RobotBehavior
 import os
 
+
 class UserConfig:
     def __init__(self):
         # OpenAI API related
+        # [required]: OpenAI API key
+        self.openai_api_key = os.getenv("OPENAI_API_KEY")
         # [required]: Name of the OpenAI language model to be used
         self.openai_model = "gpt-3.5-turbo-0613"
         # self.openai_model="gpt-4-0613"
@@ -93,3 +96,25 @@ class UserConfig:
         # [optional]: The robot functions list
         self.robot_functions_list = self.robot_behavior.robot_functions_list
 
+        # AWS related
+        # [required]: AWS IAM access key id
+        self.aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+        # [required]: AWS IAM secret access key
+        self.aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+        # [required]: AWS IAM region name
+        self.aws_region_name = "<your_region_name>"
+        # [required]: AWS S3 bucket name
+        self.bucket_name = "<your_bucket_name>"
+        # [optional]: AWS transcription language, change this to 'zh-CN' for Chinese
+        self.aws_transcription_language = "en-US"
+        # [optional]: AWS polly voice id, change this to 'Zhiyu' for Chinese
+        self.aws_voice_id = "Ivy"
+
+        # Audio recording related
+        # [optional]: Audio recording duration, in seconds
+        self.duration = 7
+        # [optional]: Audio recording sample rate, in Hz
+        self.sample_rate = 16000
+        # [optional]: Audio recording gain multiplier
+        # Change this to increase or decrease the volume
+        self.volume_gain_multiplier = 1
