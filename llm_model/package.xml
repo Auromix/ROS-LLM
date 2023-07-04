@@ -7,6 +7,8 @@
   <maintainer email="hermanye233@icloud.com">hermanye</maintainer>
   <license>Apache-2.0</license>
 
+  <depend>llm_config</depend>
+  <depend>llm_interfaces</depend>
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>

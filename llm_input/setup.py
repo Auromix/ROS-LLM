@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "llm_audio_input = llm_input.audio_input:main",
+            "llm_audio_input = llm_input.llm_audio_input:main",
         ],
     },
 )

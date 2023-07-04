@@ -15,11 +15,12 @@ setup(
     zip_safe=True,
     maintainer='hermanye',
     maintainer_email='hermanye233@icloud.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='The llm_input package contains input nodes for the ROS-LLM.',
+    license="Apache-2.0",
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "llm_audio_output = llm_output.llm_audio_output:main",
         ],
     },
 )

@@ -20,7 +20,7 @@ setup(
             glob(os.path.join("launch", "*launch.[pxy][yma]*")),
         ),
     ],
-    install_requires=['setuptools','llm_config'],
+    install_requires=['setuptools', 'llm_config'],
     zip_safe=True,
     maintainer='hermanye',
     maintainer_email='hermanye233@icloud.com',
