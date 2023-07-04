@@ -31,7 +31,7 @@
 robot_functions_list = [
     {
         "name": "publish_cmd_vel",
-        "description": "Publish cmd_vel message to control the movement of turtlesim, including rotation and movement",
+        "description": "Publish cmd_vel message to control the movement of turtlesim, including rotation and movement,only used for turtlesim,not for robotic arm",
         "parameters": {
             "type": "object",
             "properties": {
@@ -72,11 +72,93 @@ robot_functions_list = [
     },
     {
         "name": "reset_turtlesim",
-        "description": "Resets the turtlesim to its initial state and clears the screen",
+        "description": "Resets the turtlesim to its initial state and clears the screen,only used for turtlesim,not for robotic arm",
         "parameters": {
             "type": "object",
             "properties": {},
             "required": [],
+        },
+    },
+    {
+        "name": "publish_target_pose",
+        "description": "Publish target pose message to control the movement of arm robot, including x, y, z, roll, pitch, yaw",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number",
+                    "description": "The x position of the target pose",
+                },
+                "y": {
+                    "type": "number",
+                    "description": "The y position of the target pose",
+                },
+                "z": {
+                    "type": "number",
+                    "description": "The z position of the target pose",
+                },
+                "roll": {
+                    "type": "number",
+                    "description": "The roll of the target pose",
+                },
+                "pitch": {
+                    "type": "number",
+                    "description": "The pitch of the target pose",
+                },
+                "yaw": {
+                    "type": "number",
+                    "description": "The yaw of the target pose",
+                },
+            },
+            "required": [
+                "x",
+                "y",
+                "z",
+                "roll",
+                "pitch",
+                "yaw",
+            ],
+        },
+    },
+    {
+        "name": "publish_target_pose",
+        "description": "Publish target pose message to control the movement of arm robot, including x, y, z, roll, pitch, yaw. For example,[0.2, 0.2, 0.2, 0.2, 0.2, 0.2] is a valid target pose.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "number",
+                    "description": "The x position of the target pose",
+                },
+                "y": {
+                    "type": "number",
+                    "description": "The y position of the target pose",
+                },
+                "z": {
+                    "type": "number",
+                    "description": "The z position of the target pose",
+                },
+                "roll": {
+                    "type": "number",
+                    "description": "The roll of the target pose in radians",
+                },
+                "pitch": {
+                    "type": "number",
+                    "description": "The pitch of the target pose in radians",
+                },
+                "yaw": {
+                    "type": "number",
+                    "description": "The yaw of the target pose in radians",
+                },
+            },
+            "required": [
+                "x",
+                "y",
+                "z",
+                "roll",
+                "pitch",
+                "yaw",
+            ],
         },
     },
 ]
