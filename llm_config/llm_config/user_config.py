@@ -113,9 +113,12 @@ class UserConfig:
         # [optional]: AWS polly voice id, change this to 'Zhiyu' for Chinese
         self.aws_voice_id = "Ivy"
 
+        # OpenAI Whisper Model size related
+        # [optional]: OpenAI Whisper Model size: tiny base small medium large
+        self.whisper_model_size = "medium"
         # Audio recording related
         # [optional]: Audio recording duration, in seconds
-        self.duration = 7
+        self.duration = 5
         # [optional]: Audio recording sample rate, in Hz
         self.sample_rate = 16000
         # [optional]: Audio recording gain multiplier
