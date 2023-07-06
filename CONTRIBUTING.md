@@ -1,6 +1,6 @@
-# Contributing to My Project
+# Contributing to ROS-LLM Project
 
-Thank you for your interest in contributing to My Project! Here are some guidelines to help you get started.
+Thank you for your interest in contributing to ROS-LLM Project! Here are some guidelines to help you get started.
 
 ## Reporting Bugs
 
@@ -20,4 +20,4 @@ If you want to contribute code changes to the project, please follow these steps
 4. Push your branch to your fork on GitHub.
 5. Open a pull request on the main repository and describe your changes in detail.
 
-We appreciate all contributions to My Project and will review pull requests as quickly as possible. Thank you for your help!
+We appreciate all contributions to ROS-LLM Project and will review pull requests as quickly as possible. Thank you for your help!
