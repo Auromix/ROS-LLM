@@ -63,13 +63,18 @@ bash config_openai_api_key.sh
 **4. Configure AWS Settings (Optional):**
 
 For cloud natural interaction capabilities, configure the AWS settings. If you prefer to use local ASR, this step can be skipped.
+
+For low-performance edge embedded platforms, it is recommended to use ASR cloud services to reduce computing pressure, and for high-performance personal hosts, it is recommended to use local ASR services to speed up response
+
 ```bash
 cd ROS-LLM/llm_install
 bash config_aws.sh
 ```
-**4. Configure OpenAI Whisper Settings (Optional):**
 
+**4. Configure OpenAI Whisper Settings (Optional):**
 For local natural interaction capabilities, configure the OpenAI Whisper settings. If you prefer to use cloud ASR, this step can be skipped.
+
+For low-performance edge embedded platforms, it is recommended to use ASR cloud services to reduce computing pressure, and for high-performance personal hosts, it is recommended to use local ASR services to speed up response
 ```bash
 pip install -U openai-whisper
 pip install setuptools-rust
