@@ -62,7 +62,7 @@ bash config_openai_api_key.sh
 
 **4. Configure AWS Settings (Optional):**
 
-For natural interaction capabilities, configure the AWS settings. If you prefer to use local ASR, this step can be skipped.
+For cloud natural interaction capabilities, configure the AWS settings. If you prefer to use local ASR, this step can be skipped.
 ```bash
 cd ROS-LLM/llm_install
 bash config_aws.sh
