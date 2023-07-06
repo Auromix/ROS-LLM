@@ -85,7 +85,7 @@ source <your_ws>/install/setup.bash
 ros2 launch llm_bringup chatgpt_with_turtle_robot.launch.py
 ```
 
-## Configure Your Own Robot (Optional)
+## ⚙️ Configure Your Own Robot (Optional)
 
 To use the framework with your own robot, modify the `llm_robot` and `llm_config` packages to suit your robot's specifications. This allows you to customize the behavior of your robot.
 
