@@ -125,12 +125,12 @@ Keep an eye on this repo for updates. Your suggestions and contributions are alw
 ## To user
 If you find this project useful, please consider giving it a ⭐️ star on GitHub! Your support helps us improve the project and encourages further development. Don't forget to also share it with your friends and colleagues who might it beneficial. Thank you for your support! 
 
-# Contributing
+## Contributing
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
 
 
 
-# License
+## License
 ```
 Copyright 2023 HermanYe @Auromix
 Licensed under the Apache License, Version 2.0 (the "License");
