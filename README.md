@@ -62,10 +62,17 @@ bash config_openai_api_key.sh
 
 **4. Configure AWS Settings (Optional):**
 
-For natural interaction capabilities, configure the AWS settings. If you prefer to use text input, this step can be skipped.
+For natural interaction capabilities, configure the AWS settings. If you prefer to use local ASR, this step can be skipped.
 ```bash
 cd ROS-LLM/llm_install
 bash config_aws.sh
+```
+**4. Configure OpenAI Whisper Settings (Optional):**
+
+For local natural interaction capabilities, configure the OpenAI Whisper settings. If you prefer to use cloud ASR, this step can be skipped.
+```bash
+pip install -U openai-whisper
+pip install setuptools-rust
 ```
 
 **5. Build the Workspace:**
@@ -79,7 +86,7 @@ colcon build --symlink-install
 
 **6. Run the Demo:**
 
-Source the setup script and launch the demo.
+Source the setup script and launch the Turtlesim demo with cloud ASR.
 ```bash
 source <your_ws>/install/setup.bash
 ros2 launch llm_bringup chatgpt_with_turtle_robot.launch.py
