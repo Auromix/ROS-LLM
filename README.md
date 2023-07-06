@@ -72,6 +72,7 @@ bash config_aws.sh
 ```
 
 **4. Configure OpenAI Whisper Settings (Optional):**
+
 For local natural interaction capabilities, configure the OpenAI Whisper settings. If you prefer to use cloud ASR, this step can be skipped.
 
 For low-performance edge embedded platforms, it is recommended to use ASR cloud services to reduce computing pressure, and for high-performance personal hosts, it is recommended to use local ASR services to speed up response
