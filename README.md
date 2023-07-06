@@ -90,7 +90,7 @@ ros2 launch llm_bringup chatgpt_with_turtle_robot.launch.py
 To use the framework with your own robot, modify the `llm_robot` and `llm_config` packages to suit your robot's specifications. This allows you to customize the behavior of your robot.
 
 
-## Future Development Plans
+## 🧑‍💻 Future Development Plans
 
 We are continuously striving to enhance ROS-LLM to better serve the developers and roboticists in the community. Below are the key developments we plan to undertake in the upcoming updates:
 
@@ -122,15 +122,15 @@ Keep an eye on this repo for updates. Your suggestions and contributions are alw
 
 
 
-## To user
+## 🙋 To user
 If you find this project useful, please consider giving it a ⭐️ star on GitHub! Your support helps us improve the project and encourages further development. Don't forget to also share it with your friends and colleagues who might it beneficial. Thank you for your support! 
 
-## Contributing
+## 🏆 Contributing
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
 
 
 
-## License
+## 🪪 License
 ```
 Copyright 2023 Herman Ye @Auromix
 Licensed under the Apache License, Version 2.0 (the "License");
