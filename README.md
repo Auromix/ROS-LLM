@@ -84,6 +84,10 @@ Source the setup script and launch the demo.
 source <your_ws>/install/setup.bash
 ros2 launch llm_bringup chatgpt_with_turtle_robot.launch.py
 ```
+start listening
+```bash
+ros2 topic pub /llm_state std_msgs/msg/String "data: 'listening'" -1
+```
 
 ## ⚙️ Configure Your Own Robot (Optional)
 
