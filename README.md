@@ -1,62 +1,126 @@
-[![ROS2 VERSION](https://img.shields.io/badge/ROS-ROS%202%20Humble-brightgreen)](http://docs.ros.org/en/humble/index.html) &nbsp; [![Ubuntu VERSION](https://img.shields.io/badge/Ubuntu-22.04-green)](https://ubuntu.com/) &nbsp; [![LICENSE](https://img.shields.io/badge/license-Apache--2.0-informational)](https://github.com/mangdangroboticsclub/chatgpt-minipupper2-ros2-humble/blob/main/LICENSE) &nbsp;
-
+[![Official](https://img.shields.io/badge/Official%20-Auromix-blue?style=flat&logo=world&logoColor=white)](https://github.com/Auromix) &nbsp;
+[![ROS2 VERSION](https://img.shields.io/badge/ROS-ROS%202%20Humble-brightgreen)](http://docs.ros.org/en/humble/index.html) &nbsp;
+[![Ubuntu VERSION](https://img.shields.io/badge/Ubuntu-22.04-green)](https://ubuntu.com/) &nbsp; [![LICENSE](https://img.shields.io/badge/license-Apache--2.0-informational)](https://github.com/mangdangroboticsclub/chatgpt-minipupper2-ros2-humble/blob/main/LICENSE) &nbsp;
+[![GitHub Repo stars](https://img.shields.io/github/stars/Auromix/ROS-LLM?style=social)](https://github.com/Auromix/ROS-LLM/stargazers) &nbsp;
+[![Twitter Follow](https://img.shields.io/twitter/follow/Hermanye233?style=social)](https://twitter.com/Hermanye233) &nbsp;
 # ROS-LLM
-The ROS-LLM project is a ROS interface designed to provide natural language and visual interaction as well as motion control capabilities for your robot. This software package enables you to harness LLM-based features (such as GPT-4 and ChatGPT) to enhance robotic applications within the ROS ecosystem, including both ros1 and ros2. Through an easy-to-use installation and customization process, ROS-LLM offers a easy solution for crafting interactive experiences with any robot. 
+The ROS-LLM project is a ROS framework for embodied intelligence applications. It enables natural language interactions and large model-based control of robot motion and navigation for any robot operating on ROS.
 
-# How to use
-## 1. Clone the repository
+ROS-LLM empowers you to utilize functionalities based on Large Language Models, such as GPT-4 and ChatGPT, for robot decision-making and control. 
+
+This framework is designed to be easy to extend. By simply providing a function interface for your robot, following the provided example, you can integrate and use ROS-LLM within ten minutes. 
+
+ROS-LLM offers a simple solution for quickly creating interactive and control experiences with any robot.
+
+![Related Schematics](llm_imgs/flow_diagram.png)
+## 🚀 Features
+
+- 🤖 **ROS Integration**: Smoothly interacts with the Robot Operating System (ROS) for expansive robotic control. 
+
+- 🧠 **Large Language Models Support**: Leverages GPT-4 and ChatGPT for enhanced decision-making and task management.
+
+- 🗣️ **Natural Interaction**: Facilitates intuitive communication with robots through conversational engagement.
+
+- 🔄 **Flexible Control**: Utilizes LLM-based systems for tasks such as motion and navigation based on language model interpretation.
+
+- 🔌 **Simplified Extensibility**: Provides an easy interface for seamless robot function integration. 
+
+- 🛠️ **Quick Development**: Creates interactive robot control experiences swiftly, sometimes in under ten minutes.
+
+- 📚 **Instructional Examples**: Offers comprehensive tutorials and examples for easier understanding and implementation.
+
+- 🗃️ **History Storage**: Retains local chat histories for convenient review and reference.
+
+
+
+## 🔥 Quickstart Guide
+
+Follow the instructions below to set up ROS-LLM:
+
+**1. Clone the Repository:**
+
+Use the command below to clone the repository.
 ```bash
 git clone https://github.com/Auromix/ROS-LLM.git
 ```
-## 2. Install the dependencies
+
+**2. Install Dependencies:**
+
+Navigate to the `llm_install` directory and execute the installation script.
 ```bash
 cd ROS-LLM/llm_install
-. dependencies_install.sh
+bash dependencies_install.sh
 ```
-## 3. Add your OpenAI API key
+
+**3. Configure OpenAI Settings:**
+
+If you don't have an OpenAI API key, you can obtain one from [OpenAI Platform](https://platform.openai.com). Use the script below to configure your OpenAI API key.
 ```bash
 cd ROS-LLM/llm_install
-. config_openai_api_key.sh
+bash config_openai_api_key.sh
 ```
-**NOTES:**
-1. If you don't have an OpenAI API key, you can get one [here](https://platform.openai.com).
 
-2. Click on the user icon in the upper-right corner.
-3. Click `View API keys`.
-4. Click `Create new secret key`.
-5. Enter a `name` and click `Create secret key`.
-6. Copy your secret key.
+**4. Configure AWS Settings (Optional):**
 
+For natural interaction capabilities, configure the AWS settings. If you prefer to use text input, this step can be skipped.
+```bash
+cd ROS-LLM/llm_install
+bash config_aws.sh
+```
 
+**5. Build the Workspace:**
 
-## 4. build the workspace
+Navigate to your workspace directory and build the workspace.
 ```bash
 cd <your_ws>
+rosdep install --from-paths src --ignore-src -r -y  # Install dependencies
 colcon build --symlink-install
 ```
-## 5. Run the demo
-Terminal 1:
+
+**6. Run the Demo:**
+
+Source the setup script and launch the demo.
 ```bash
 source <your_ws>/install/setup.bash
-ros2 launch llm_bringup chatgpt_with_robot_test.launch.py 
+ros2 launch llm_bringup chatgpt_with_turtle_robot.launch.py
 ```
-Terminal 2:
-```bash
-ros2 service call /ChatGPT_service llm_interfaces/srv/ChatGPT '{request_text: "Let the turtlesim rotate counterclockwise at a great angular velocity of 50 rad/s and move forward at a certain linear velocity"}'
-```
-## 6. Config your own robot [optional]
-Modify the llm_robot and llm_config packages to fit your robot.
-You can customize behavior for your robot.
 
-# Schedule
-This project is still under development. We will release the second version in the near future. Please stay tuned.
+## Configure Your Own Robot (Optional)
 
-## TODO
-- [ ] Fix the `bug` of the robot to model service.
+To use the framework with your own robot, modify the `llm_robot` and `llm_config` packages to suit your robot's specifications. This allows you to customize the behavior of your robot.
 
-- [ ] Add the `audio input and output` function, this function has been completed and tesed, but it has not been merged into the main branch.
 
-- [ ] Add the `model agent` function to let the model make its own decisions
+## Future Development Plans
+
+We are continuously striving to enhance ROS-LLM to better serve the developers and roboticists in the community. Below are the key developments we plan to undertake in the upcoming updates:
+
+- [ ] Agent Mechanism
+
+Adding an agent mechanism allows long sequence tasks to be well divided.
+
+- [ ] Feedback Channel from External Functions
+
+We plan to add a feedback mechanism for the robot to receive information from external functions. This would significantly assist model-based decision-making processes.
+
+- [ ] Navigation Interface
+
+A new interface for robot navigation is also in the pipeline. It will enable the utilization of this framework in navigation-oriented tasks.
+
+- [ ] Sensor Input Interface
+
+The addition of other sensor input interfaces is another major development. This will incorporate environmental perception into model decision premises, preparing for functionalities such as obstacle avoidance.
+
+- [ ] Integration with Vision-based Models like Palm-e
+
+We aim to extend the capabilities of ROS-LLM by integrating models that allow for visual input, like Palm-e. This would enable the use of advanced computer vision technologies for better environment interaction.
+
+- [ ] Continuous Optimization
+
+Last but not least, we will focus on continuous optimization of the framework. We are committed to improving the rationality and extensibility of ROS-LLM to make it easier for developers to customize and extend the framework according to their needs.
+
+Keep an eye on this repo for updates. Your suggestions and contributions are always welcome!
+
+
 
 ## To user
 If you find this project useful, please consider giving it a ⭐️ star on GitHub! Your support helps us improve the project and encourages further development. Don't forget to also share it with your friends and colleagues who might it beneficial. Thank you for your support! 
@@ -79,6 +143,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. 
 ```
-
-
-
