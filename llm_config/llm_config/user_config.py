@@ -95,16 +95,19 @@ class UserConfig:
         self.robot_behavior = RobotBehavior()
         # [optional]: The robot functions list
         self.robot_functions_list = self.robot_behavior.robot_functions_list
-
+        # [optional]: Multi-robot list
+        # "" is for robot without name
+        self.multi_robots_name=["turtle1","turtle2","minipupper",""]
+        
         # AWS related
         # [required]: AWS IAM access key id
         self.aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
         # [required]: AWS IAM secret access key
         self.aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
         # [required]: AWS IAM region name
-        self.aws_region_name = 'us-west-1'
+        self.aws_region_name = 'ap-southeast-1'
         # [required]: AWS S3 bucket name
-        self.bucket_name = 'auromixtestbucket'
+        self.bucket_name = 'auromixbucket'
         # [optional]: AWS transcription language, change this to 'zh-CN' for Chinese
         self.aws_transcription_language = "en-US"
         # [optional]: AWS polly voice id, change this to 'Zhiyu' for Chinese

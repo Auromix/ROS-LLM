@@ -16,53 +16,68 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Description:
-# This example demonstrates simulating function calls for any robot,
-# such as controlling velocity and other service commands.
-# By modifying the content of this file,
-# A calling interface can be created for the function calls of any robot.
-# The Python script creates a ROS 2 Node
-# that controls the movement of the TurtleSim
-# by creating a publisher for cmd_vel messages and a client for the reset service.
-# It also includes a ChatGPT function call server
-# that can call various functions to control the TurtleSim
-# and return the result of the function call as a string.
-#
 # Author: Herman Ye @Auromix
+
+# LLM related
+import json
+import time
+import subprocess
 
 # ROS related
 import rclpy
 from rclpy.node import Node
-from llm_interfaces.srv import ChatGPT
+from std_msgs.msg import String
+from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Twist
-from std_srvs.srv import Empty
-
-# LLM related
-import json
-import os
-from llm_config.user_config import UserConfig
+from llm_interfaces.srv import ChatGPT
 
 # Global Initialization
+from llm_config.user_config import UserConfig
+
 config = UserConfig()
 
 
-class TurtleRobot(Node):
+class MultiRobot(Node):
     def __init__(self):
         super().__init__("turtle_robot")
+        # Initialize publishers dictionaries
+        self.pose_publishers = {}
+        self.cmd_vel_publishers = {}
+        for robot_name in config.multi_robots_name:
+            if robot_name == "":
+                # pose publisher
+                self.pose_publishers[robot_name] = self.create_publisher(
+                    Pose, "/pose", 10
+                )
+                # cmd_vel publishers
+                self.cmd_vel_publishers[robot_name] = self.create_publisher(
+                    Twist, "/cmd_vel", 10
+                )
+            else:
+                # pose publisher
+                self.pose_publishers[robot_name] = self.create_publisher(
+                    Pose, "/" + robot_name + "/pose", 10
+                )
+                # cmd_vel publishers
+                self.cmd_vel_publishers[robot_name] = self.create_publisher(
+                    Twist, "/" + robot_name + "/cmd_vel", 10
+                )
 
-        # Client for reset
-        self.reset_client = self.create_client(Empty, "/reset")
-        # Publisher for cmd_vel
-        self.publisher_ = self.create_publisher(Twist, "/turtle1/cmd_vel", 10)
-
-        while not self.reset_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("Service /reset not available, waiting again...")
-        # Server for function call
+        # Server for model function call
         self.function_call_server = self.create_service(
             ChatGPT, "/ChatGPT_function_call_service", self.function_call_callback
         )
-        # Node initialization log
-        self.get_logger().info("TurtleRobot node has been initialized")
+
+        # Initialization publisher
+        self.initialization_publisher = self.create_publisher(
+            String, "/llm_initialization_state", 0
+        )
+
+        # LLM state publisher
+        self.llm_state_publisher = self.create_publisher(String, "/llm_state", 0)
+
+        # Initialization ready
+        self.publish_string("robot", self.initialization_publisher)
 
     def function_call_callback(self, request, response):
         req = json.loads(request.request_text)
@@ -78,17 +93,35 @@ class TurtleRobot(Node):
             response.response_text = str(function_execution_result)
         return response
 
+    def call_service(self, **kwargs):
+        # Warning:Only empty input service is supported
+        # TODO: Add support for non-empty input service
+        service_name = kwargs.get("service_name", "")
+        service_type = kwargs.get("service_type", "")
+        command = ["ros2", "service", "call", service_name, service_type]
+
+        try:
+            command_result = subprocess.check_output(command, stderr=subprocess.STDOUT)
+            command_result = command_result.decode("utf-8")  # Convert bytes to string
+        except subprocess.CalledProcessError as command_error:
+            command_result = command_error.output.decode("utf-8")
+        return command_result
+
     def publish_cmd_vel(self, **kwargs):
         """
-        Publishes cmd_vel message to control the movement of turtlesim
+        Publishes cmd_vel message to control the movement of all types of robots
         """
+        # Get parameters
+        robot_name = kwargs.get("robot_name", "")
+        duration = kwargs.get("duration", 0)
         linear_x = kwargs.get("linear_x", 0.0)
         linear_y = kwargs.get("linear_y", 0.0)
         linear_z = kwargs.get("linear_z", 0.0)
         angular_x = kwargs.get("angular_x", 0.0)
         angular_y = kwargs.get("angular_y", 0.0)
         angular_z = kwargs.get("angular_z", 0.0)
-
+        self.get_logger().debug(f"Received cmd_vel message: {kwargs}")
+        # Create message
         twist_msg = Twist()
         twist_msg.linear.x = float(linear_x)
         twist_msg.linear.y = float(linear_y)
@@ -96,51 +129,65 @@ class TurtleRobot(Node):
         twist_msg.angular.x = float(angular_x)
         twist_msg.angular.y = float(angular_y)
         twist_msg.angular.z = float(angular_z)
+        self.get_logger().debug(f"Created cmd_vel message: {twist_msg}")
 
-        self.publisher_.publish(twist_msg)
-        self.get_logger().info(f"Publishing cmd_vel message successfully: {twist_msg}")
+        # Create publisher for new robot if not exist
+        if robot_name not in config.multi_robots_name:
+            self.cmd_vel_publishers[robot_name] = self.create_publisher(
+                Twist, f"/{robot_name}/cmd_vel", 10
+            )
+            self.get_logger().debug(f"Created new publisher for {robot_name}")
+        # Set default robot name
+        if robot_name == "":
+            robot_name = "default"
+            topic = "/cmd_vel"
+            self.get_logger().debug(f"default robot:{robot_name}")
+        else:
+            topic = f"/{robot_name}/cmd_vel"
+
+        if duration == 0:
+            self.cmd_vel_publishers[robot_name].publish(twist_msg)
+        else:
+            # Publish message for duration
+            start_time = time.time()
+            while time.time() - start_time < duration:
+                self.cmd_vel_publishers[robot_name].publish(twist_msg)
+                time.sleep(0.1)
+
+        # Log
+        self.get_logger().info(f"Published {topic} message successfully: {twist_msg}")
+        
+        # Stop robot
+        stop_msg = Twist()
+        stop_msg.linear.x = 0.0
+        stop_msg.linear.y = 0.0
+        stop_msg.linear.z = 0.0
+        stop_msg.angular.x = 0.0
+        stop_msg.angular.y = 0.0
+        stop_msg.angular.z = 0.0
+        self.cmd_vel_publishers[robot_name].publish(stop_msg)
         return twist_msg
 
-    def reset_turtlesim(self, **kwargs):
-        """
-        Resets the turtlesim to its initial state and clears the screen
-        """
-        empty_req = Empty.Request()
-        try:
-            future = self.reset_client.call_async(empty_req)
-            response_text = "Reset turtlesim successfully"
-        except Exception as error:
-            self.get_logger().info(f"Failed to reset turtlesim: {error}")
-            return str(error)
-        else:
-            return response_text
-        
-    def publish_target_pose(self, **kwargs):
-        """
-        Publishes target_pose message to control the movement of arx5_arm
-        """
+    def publish_string(self, string_to_send, publisher_to_use):
+        msg = String()
+        msg.data = string_to_send
 
-        x_value = kwargs.get("x", 0.2)
-        y_value = kwargs.get("y", 0.2)
-        z_value = kwargs.get("z", 0.2)
+        publisher_to_use.publish(msg)
+        self.get_logger().info(
+            f"Topic: {publisher_to_use.topic_name}\nMessage published: {msg.data}"
+        )
 
-        roll_value = kwargs.get("roll", 0.2)
-        pitch_value = kwargs.get("pitch", 0.2)
-        yaw_value = kwargs.get("yaw", 0.2)
-
-        pose = [x_value, y_value, z_value, roll_value, pitch_value, yaw_value]
-        pose_str = ', '.join(map(str, pose))
-
-        command=f"ros2 topic pub /target_pose std_msgs/msg/Float64MultiArray '{{data: [{pose_str}]}}' -1"
-        os.system(command)
-        self.get_logger().info(f"Published target message successfully: {pose}")
-        return pose_str
 
 def main():
     rclpy.init()
-    turtle_robot = TurtleRobot()
-    rclpy.spin(turtle_robot)
-    rclpy.shutdown()
+    multi_robot = MultiRobot()
+    try:
+        rclpy.spin(multi_robot)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        multi_robot.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == "__main__":

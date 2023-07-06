@@ -28,7 +28,7 @@
 
 # Example robot functions list for the TurtleSim
 # The user can add, remove, or modify the functions in this list
-robot_functions_list = [
+robot_functions_list_1 = [
     {
         "name": "publish_cmd_vel",
         "description": "Publish cmd_vel message to control the movement of turtlesim, including rotation and movement,only used for turtlesim,not for robotic arm",
@@ -163,6 +163,60 @@ robot_functions_list = [
     },
 ]
 
+robot_functions_list_multi_robot = [
+    {
+        "name": "publish_cmd_vel",
+        "description": "Publish cmd_vel message to control the movement and rotation of turtlesim. This function is only compatible with turtlesim and not for robotic arm.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "robot_name": {
+                    "type": "string",
+                    "description": "Name of the robot instance that should be controlled. Valid robot names are 'turtle1','turtle2','minipupper', when no specific robot name is specified, robot_name=''",
+                },
+                "duration": {
+                    "type": "number",
+                    "description": "Duration of time (in seconds) for which the movement should be performed.",
+                },
+                "linear_x": {
+                    "type": "number",
+                    "description": "Linear velocity along the x-axis for the robot.",
+                },
+                "linear_y": {
+                    "type": "number",
+                    "description": "Linear velocity along the y-axis for the robot.",
+                },
+                "linear_z": {
+                    "type": "number",
+                    "description": "Linear velocity along the z-axis for the robot.",
+                },
+                "angular_x": {
+                    "type": "number",
+                    "description": "Angular velocity around the x-axis for the robot.",
+                },
+                "angular_y": {
+                    "type": "number",
+                    "description": "Angular velocity around the y-axis for the robot.",
+                },
+                "angular_z": {
+                    "type": "number",
+                    "description": "Angular velocity around the z-axis for the robot.",
+                },
+            },
+            "required": [
+                "robot_name",
+                "duration",
+                "linear_x",
+                "linear_y",
+                "linear_z",
+                "angular_x",
+                "angular_y",
+                "angular_z",
+            ],
+        },
+    },
+]
+
 
 class RobotBehavior:
     """
@@ -171,7 +225,7 @@ class RobotBehavior:
     """
 
     def __init__(self):
-        self.robot_functions_list = robot_functions_list
+        self.robot_functions_list = robot_functions_list_multi_robot
 
 
 if __name__ == "__main__":

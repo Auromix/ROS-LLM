@@ -37,9 +37,13 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-
+    arx5_bringup_launch_path = PathJoinSubstitution([FindPackageShare('arx5_bringup'), 'launch', 'bringup.launch.py']) 
+    arx5_bringup_launch =IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(arx5_bringup_launch_path),)
+    
     return LaunchDescription(
         [
+            arx5_bringup_launch,
             Node(
                 package="llm_input",
                 executable="llm_audio_input",
@@ -62,6 +66,13 @@ def generate_launch_description():
                 package="llm_robot",
                 executable="multi_robot",
                 name="multi_robot",
+                output="screen",
+            ),
+
+            Node(
+                package="turtlesim",
+                executable="turtlesim_node",
+                name="turtlesim_node",
                 output="screen",
             ),
         ]
