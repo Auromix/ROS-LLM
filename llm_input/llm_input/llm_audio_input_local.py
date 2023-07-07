@@ -104,7 +104,8 @@ class AudioInput(Node):
         self.get_logger().info("Local Converting...")
 
         # Step 7: Get the transcribed text
-        whisper_result = whisper_model.transcribe(self.tmp_audio_file)
+        whisper_result = whisper_model.transcribe(self.tmp_audio_file,language=config.whisper_language)
+
         transcript_text = whisper_result["text"]
         self.get_logger().info("Audio to text conversion complete!")
 

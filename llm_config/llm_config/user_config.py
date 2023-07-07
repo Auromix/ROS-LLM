@@ -116,6 +116,8 @@ class UserConfig:
         # OpenAI Whisper Model size related
         # [optional]: OpenAI Whisper Model size: tiny base small medium large
         self.whisper_model_size = "medium"
+        # [optional]: OpenAI Whisper Model language: en
+        self.whisper_language="en"
         # Audio recording related
         # [optional]: Audio recording duration, in seconds
         self.duration = 5
